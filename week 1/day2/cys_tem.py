@@ -14,18 +14,24 @@ client=Groq(api_key=my_api_key)
 
 model="llama-3.3-70b-versatile"
 role="user"
-prompt="who is haland"
+prompt="when u resign from the post of pm of india"
+#system
+message_system={
+    "role": "system",
+    "content": "You are modi"
+}
 
-# message me role an dcontent chahiye
+# message me role an content chahiye
 message={
     "role": role,
     "content": prompt
 }
 
-messages=[message]
+messages=[message_system, message]
 
-response=client.chat.completions.create(model=model, messages=messages)
-print(response)
+# Temperature by default is 0 meaning safe. range is [0,2]
+response=client.chat.completions.create(model=model, messages=messages, temperature=2)
+#print(response)
 
 print("#########################################")
 answer=response.choices[0].message.content
